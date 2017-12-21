@@ -21,3 +21,11 @@ Livre::Livre(Livre const& livre_a_copier){
     public_cible = livre_a_copier.public_cible;
     emprunte = livre_a_copier.emprunte;
 }
+
+int Livre::getId(){
+    return this->id;
+}
+
+void Livre::setEmprunte(bool b){
+    this->emprunte = b;
+}

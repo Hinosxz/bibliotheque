@@ -9,24 +9,24 @@ Adherent::Adherent(int id_adherent, string nom, string prenom, string adresse, B
     this->nom = nom;
     this->prenom = prenom;
     this->adresse = adresse;
-    this->biblio_affiliee = biblio_affiliee;
+    this->biblio_affiliee = &biblio_affiliee;
     this->nb_livres_max = nb_livres_max;
     this->liste_livres_empruntes = new int[nb_livres_max];
     this->curseur = 0;
 }
 
-void Adherent::emprunte(id_livre){
+void Adherent::emprunte(int id_livre){
     if (curseur < nb_livres_max){
         liste_livres_empruntes[curseur] = id_livre; /* Ajoute l'id du livre emprunté à la liste à la position curseur */
         curseur++; /* Incrémente le curseur */
-        biblio_affiliee.prete(id_livre);
+        biblio_affiliee->prete(id_livre);
     }
     else{
         cout << "Désolé, vous avez atteint le nombre maximum de livres empruntés.";
     }
 }
 
-void Adherent::rend(id_livre){
+void Adherent::rend(int id_livre){
     /* Recherche le livre dans la liste */
     int indice;
     for (int i = 0; i < nb_livres_max; i++){
@@ -49,5 +49,5 @@ void Adherent::rend(id_livre){
     /* On décrémente le curseur */
     curseur--;
     /* La bibliothèque reprend le livre */
-    biblio_affiliee.reprend(id_livre);
+    biblio_affiliee->reprend(id_livre);
 }

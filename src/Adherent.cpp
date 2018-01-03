@@ -4,6 +4,18 @@
 #include <string>
 using namespace std;
 
+//Constructors
+Adherent::Adherent(){
+    this->id_adherent = -1;
+    this->nom = string();
+    this->prenom = string();
+    this->adresse = string();
+    this->biblio_affiliee = NULL;
+    this->nb_livres_max = 0;
+    this->liste_livres_empruntes = new int[0];
+    this->curseur = 0;
+}
+
 Adherent::Adherent(int id_adherent, string nom, string prenom, string adresse, Bibliotheque biblio_affiliee, int nb_livres_max){
     this->id_adherent = id_adherent;
     this->nom = nom;
@@ -15,6 +27,69 @@ Adherent::Adherent(int id_adherent, string nom, string prenom, string adresse, B
     this->curseur = 0;
 }
 
+
+
+//Setters
+void Adherent::setIdAdherent(int id_adherent){
+    this->id_adherent = id_adherent;
+}
+
+void Adherent::setNom(string nom){
+    this->nom = nom;
+}
+
+void Adherent::setPrenom(string prenom){
+    this->prenom = prenom;
+}
+
+void Adherent::setAdresse(string adresse){
+    this->adresse = adresse;
+}
+
+void Adherent::setBiblioAffiliee(Bibliotheque biblio_affiliee){
+    this->biblio_affiliee = &biblio_affiliee;
+}
+
+void Adherent::setNbLivresMax(int nb_livres_max){
+    this->nb_livres_max = nb_livres_max;
+}
+
+void Adherent::setListeLivresEmpruntes(int nb_livres_max){
+    this->liste_livres_empruntes = new int[nb_livres_max];
+}
+
+
+//Getters
+int Adherent::getIdAdherent(){
+    return this->id_adherent;
+}
+
+string Adherent::getNom(){
+    return this->nom;
+}
+
+string Adherent::getPrenom(){
+    return this->prenom;
+}
+
+string Adherent::getAdresse(){
+    return this->adresse;
+}
+
+int Adherent::getNbLivresMax(){
+    return this->nb_livres_max;
+}
+
+int Adherent::getIdLivreEmprunte(int curseur){
+    return this->liste_livres_empruntes[curseur];
+}
+
+int Adherent::getCurseur(){
+    return this->curseur;
+}
+
+
+//Operations
 void Adherent::emprunte(int id_livre){
     if (curseur < nb_livres_max){
         liste_livres_empruntes[curseur] = id_livre; /* Ajoute l'id du livre emprunté à la liste à la position curseur */

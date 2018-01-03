@@ -3,6 +3,7 @@
 #include "Roman.h"
 using namespace std;
 
-Roman::Roman(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string genre, bool emprunte) : Livre(id, auteur, titre, editeur, ISBN, public_cible, emprunte){
+Roman::Roman(string auteur, string titre, string editeur, string ISBN, string public_cible, string genre) : Livre(auteur, titre, editeur, ISBN, public_cible){
+	this->categorie = "Roman";
 	this->genre = genre;
 }

@@ -11,7 +11,7 @@ class RecueilPoesies: public Livre
 protected:
 	string indicateur;
 public:
-	RecueilPoesies(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string indicateur, bool emprunte = false);
+	RecueilPoesies(string auteur, string titre, string editeur, string ISBN, string public_cible, string indicateur);
 };
 
 #endif /* RECUEILPOESIES_H_ */

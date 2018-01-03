@@ -12,14 +12,14 @@ private:
     string nom;
     string prenom;
     string adresse;
-    Bibliotheque *biblio_affiliee; /* pointeur vers la bibliothèque affiliée */
-    int *liste_livres_empruntes; /* liste contient les livres empruntes*/
+    Bibliotheque *biblio_affiliee; // pointeur vers la bibliothèque affiliée
+    int *liste_livres_empruntes; // liste contenant les ids des livres empruntes
     int nb_livres_max;
-    int curseur;
+    int curseur; //Pas de setter car n'a vocation qu'à être incrémenté ou décrémenté
 public:
     //Constructors
     Adherent();
-    Adherent(int id_adherent, string nom, string prenom, string adresse, Bibliotheque biblio_affiliee, int nb_livres_max);
+    Adherent(int id_adherent, string nom, string prenom, string adresse, Bibliotheque &biblio_affiliee, const int nb_livres_max);
 
     //Setters
     void setIdAdherent(int);
@@ -27,16 +27,17 @@ public:
     void setPrenom(string);
     void setAdresse(string);
     void setBiblioAffiliee(Bibliotheque);
+    void setLivreEmprunte(int);
     void setNbLivresMax(int);
-    void setListeLivresEmpruntes(int nb_livres_max);
 
     //Getters
     int getIdAdherent();
     string getNom();
     string getPrenom();
     string getAdresse();
+    Bibliotheque* getBiblioAffiliee();
+    int getLivreEmprunte(int curseur);
     int getNbLivresMax();
-    int getIdLivreEmprunte(int curseur);
     int getCurseur();
 
     //Operations

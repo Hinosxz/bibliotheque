@@ -11,7 +11,7 @@ class BandeDessinee: public Livre
 protected:
 	string dessinateur;
 public:
-	BandeDessinee(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string dessinateur, bool emprunte = false);
+	BandeDessinee(string auteur, string titre, string editeur, string ISBN, string public_cible, string dessinateur);
 };
 
 #endif /* BANDEDESSINEE_H_ */

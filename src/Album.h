@@ -11,7 +11,7 @@ class Album: public Livre
 protected:
 	string type_illustration;
 public:
-	Album(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string type_illustration, bool emprunte = false);
+	Album(string auteur, string titre, string editeur, string ISBN, string public_cible, string type_illustration);
 };
 
 #endif /* ALBUM_H_ */

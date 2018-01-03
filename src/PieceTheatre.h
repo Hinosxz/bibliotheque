@@ -11,7 +11,7 @@ class PieceTheatre: public Livre
 protected:
 	string siecle;
 public:
-	PieceTheatre(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string siecle, bool emprunte = false);
+	PieceTheatre(string auteur, string titre, string editeur, string ISBN, string public_cible, string siecle);
 };
 
 #endif /* PIECETHEATRE_H_ */

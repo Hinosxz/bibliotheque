@@ -11,7 +11,7 @@ class Roman: public Livre
 protected:
 	string genre;
 public:
-	Roman(int id, string auteur, string titre, string editeur, string ISBN, string public_cible, string genre, bool emprunte = false);
+	Roman(string auteur, string titre, string editeur, string ISBN, string public_cible, string genre);
 };
 
 #endif /* ROMAN_H_ */

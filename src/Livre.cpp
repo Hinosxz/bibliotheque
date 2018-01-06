@@ -12,8 +12,8 @@ Livre::Livre(){
     this->public_cible = string();
     this->categorie = string();
     this->emprunte = false;
-    this->preteA = false;
-    this->preteAvecId = -1;
+    this->prete_a = false;
+    this->prete_avec_id = -1;
 }
 
 Livre::Livre(string auteur, string titre, string editeur, string ISBN, string public_cible){
@@ -25,7 +25,8 @@ Livre::Livre(string auteur, string titre, string editeur, string ISBN, string pu
     this->public_cible = public_cible;
     this->categorie = string();
     this->emprunte = false;
-    this->preteAvecId = -1;
+    this->prete_a = false;
+    this->prete_avec_id = -1;
 }
 
 Livre::Livre(Livre const& livre_a_copier){
@@ -37,8 +38,8 @@ Livre::Livre(Livre const& livre_a_copier){
     public_cible = livre_a_copier.public_cible;
     categorie = livre_a_copier.categorie;
     emprunte = livre_a_copier.emprunte;
-    preteA = livre_a_copier.preteA;
-    preteAvecId = livre_a_copier.preteAvecId;
+    prete_a = livre_a_copier.prete_a;
+    prete_avec_id = livre_a_copier.prete_avec_id;
 }
 
 
@@ -76,11 +77,11 @@ void Livre::setEmprunte(bool emprunte){
 }
 
 void Livre::setPreteA(bool preteA){
-    this->preteA = preteA;
+    this->prete_a = preteA;
 }
 
 void Livre::setPreteAvecId(int preteAvecId){
-    this->preteAvecId = preteAvecId;
+    this->prete_avec_id = preteAvecId;
 }
 
 //Getters
@@ -117,9 +118,9 @@ bool Livre::getEmprunte(){
 }
 
 bool Livre::getPreteA(){
-    return this->preteA;
+    return this->prete_a;
 }
 
 int Livre::getPreteAvecId(){
-    return this->preteAvecId;
+    return this->prete_avec_id;
 }

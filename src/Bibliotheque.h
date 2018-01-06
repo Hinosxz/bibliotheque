@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 #include "Livre.h"
 using namespace std;
 
@@ -10,9 +11,10 @@ private:
     string nom;
     string adresse;
     int id_biblio;
-    Livre *liste_livres;
-    Bibliotheque **liste_biblio_preteuses;
-    int nb_livres;
+    vector <Livre> liste_livres;
+    vector <Bibliotheque*> liste_biblio_preteuses;
+    int nb_livres; //donnera son id aux livres ajoutés à la liste
+    int nb_adherents; //donnera son id aux adhérents qui choisissent la bibliothèque
 public:
     //Constructors
     Bibliotheque();
@@ -25,6 +27,7 @@ public:
     void setLivre(Livre); //Ajoute un livre à la liste_livres
     void setBiblioPreteuse(Bibliotheque&);
     void setNbLivres(int);
+    void incNbAdherents(); //nb_adherents doit seulement être incrémenté
 
     //Getters
     string getNom();
@@ -33,6 +36,7 @@ public:
     Livre getLivre(int);
     Bibliotheque *getBiblioPreteuse(int);
     int getNbLivres();
+    int getNbAdherents();
 
     //Operations
     void achete(Livre&); //ajoute un livre à la bibliothèque
@@ -44,7 +48,7 @@ public:
     void demande(string ISBN, Bibliotheque &biblio_preteuse); //demande un livre à une autre bibliothèque
     Livre cherche(string ISBN); //cherche un livre pour une bibliothèque demandeuse
 
-    void rend();
+    void rend(); //rend aux bibliothèques d'origines les livres prêtés mais pas empruntés
 
     bool prete(int); //renvoie si oui ou non le livre peut être prêté, si oui elle change son état
     void reprend(int); //change l'état du livre à reprendre

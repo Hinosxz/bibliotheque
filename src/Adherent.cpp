@@ -10,18 +10,17 @@ Adherent::Adherent(){
     this->adresse = string();
     this->biblio_affiliee = NULL;
     this->nb_livres_max = 0;
-    this->liste_livres_empruntes = new int[0];
     this->curseur = 0;
 }
 
-Adherent::Adherent(int id_adherent, string nom, string prenom, string adresse, Bibliotheque &biblio_affiliee, const int nb_livres_max){
-    this->id_adherent = id_adherent;
+Adherent::Adherent(string nom, string prenom, string adresse, Bibliotheque &biblio_affiliee, const int nb_livres_max){
     this->nom = nom;
     this->prenom = prenom;
     this->adresse = adresse;
     this->biblio_affiliee = &biblio_affiliee;
+    this->id_adherent = biblio_affiliee.getNbAdherents(); //Affecte l'id de l'adhérent depuis la bibliothèque
+    biblio_affiliee.incNbAdherents(); //Ajoute 1 au nombre d'adhérents de la bibliothèque affiliée
     this->nb_livres_max = nb_livres_max;
-    this->liste_livres_empruntes = new int[nb_livres_max];
     this->curseur = 0;
 }
 
@@ -54,7 +53,7 @@ void Adherent::setNbLivresMax(const int nb_livres_max){
 
 void Adherent::setLivreEmprunte(int id_livre){
     //Ajoute l'id du livre emprunté à la liste à la position curseur
-    liste_livres_empruntes[getCurseur()] = id_livre;
+    liste_livres_empruntes.push_back(id_livre);
     //Incrémente le curseur
     curseur++;
 }
@@ -120,19 +119,7 @@ void Adherent::rend(int id_livre){
     }
     // Si le livre n'est pas dans la liste, il ne doit pas être rendu
     if (indice != -1) {
-        // Recopie l'ancienne liste sans le livre en question dans une nouvelle liste
-        int *nouvelle_liste = new int[getNbLivresMax()];
-        // Recopie la première partie de la liste jusqu'à l'indice du livre à supprimer
-        for (int i = 0; i < indice; i++) {
-            nouvelle_liste[i] = getLivreEmprunte(i);
-        }
-        // Recopie la seconde partie de la liste jusqu'à la fin en sautant le livre à supprimer */
-        for (int i = indice; i < getCurseur() - 1; i++) {
-            nouvelle_liste[i] = getLivreEmprunte(i + 1);
-        }
-        // Change la liste de livres empruntés par la nouvelle liste et supprime la ensuite
-        liste_livres_empruntes = nouvelle_liste;
-        delete[] nouvelle_liste;
+        liste_livres_empruntes.erase(liste_livres_empruntes.begin() + indice);
         // Décrémente le curseur
         curseur--;
         // La bibliothèque reprend le livre

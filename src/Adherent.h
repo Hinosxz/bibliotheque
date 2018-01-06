@@ -1,5 +1,5 @@
 #include <string>
-#include "Livre.h"
+#include <vector>
 #include "Bibliotheque.h"
 using namespace std;
 
@@ -13,13 +13,13 @@ private:
     string prenom;
     string adresse;
     Bibliotheque *biblio_affiliee; // pointeur vers la bibliothèque affiliée
-    int *liste_livres_empruntes; // liste contenant les ids des livres empruntes
+    vector <int> liste_livres_empruntes; // liste contenant les ids des livres empruntes
     int nb_livres_max;
     int curseur; //Pas de setter car n'a vocation qu'à être incrémenté ou décrémenté
 public:
     //Constructors
     Adherent();
-    Adherent(int id_adherent, string nom, string prenom, string adresse, Bibliotheque &biblio_affiliee, const int nb_livres_max);
+    Adherent(string nom, string prenom, string adresse, Bibliotheque &biblio_affiliee, int nb_livres_max);
 
     //Setters
     void setIdAdherent(int);

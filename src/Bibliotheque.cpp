@@ -8,18 +8,16 @@ Bibliotheque::Bibliotheque(){
     this->nom = string();
     this->adresse = string();
     this->id_biblio = -1;
-    this->liste_livres = new Livre[0];
-    this->liste_biblio_preteuses = new Bibliotheque*[0];
     this->nb_livres = 0;
+    this->nb_adherents = 0;
 }
 
 Bibliotheque::Bibliotheque(string nom, string adresse, int id_biblio){
     this->nom = nom;
     this->adresse = adresse;
     this->id_biblio = id_biblio;
-    this->liste_livres = new Livre[100]; /* 100 livres max pour l'instant par bibliothèque */
-    this->liste_biblio_preteuses = new Bibliotheque*[100];
     this->nb_livres = 0;
+    this->nb_adherents = 0;
 }
 
 
@@ -37,16 +35,20 @@ void Bibliotheque::setIdBiblio(int id_biblio){
 }
 
 void Bibliotheque::setLivre(Livre livre){
-    liste_livres[getNbLivres()] = livre;
+    liste_livres.push_back(livre);
     nb_livres++;
 }
 
 void Bibliotheque::setBiblioPreteuse(Bibliotheque &biblio_preteuse){
-    liste_biblio_preteuses[getNbLivres()] = &biblio_preteuse;
+    liste_biblio_preteuses.insert(liste_biblio_preteuses.begin() + getNbLivres(), &biblio_preteuse);
 }
 
 void Bibliotheque::setNbLivres(int nb_livres){
     this->nb_livres = nb_livres;
+}
+
+void Bibliotheque::incNbAdherents(){
+    nb_adherents++;
 }
 
 
@@ -75,6 +77,10 @@ int Bibliotheque::getNbLivres(){
     return this->nb_livres;
 }
 
+int Bibliotheque::getNbAdherents(){
+    return this->nb_adherents;
+}
+
 
 //Operations
 void Bibliotheque::achete(Livre &livre){
@@ -82,7 +88,7 @@ void Bibliotheque::achete(Livre &livre){
     livre.setId(getNbLivres());
     //Ajoute le livre à la liste des livres en stock et incrémente le nombre de livres
     setLivre(livre);
-    cout << "Le livre n°" << livre.getId() << " a bien été acheté !" << "\n";
+    cout << "Le livre " << livre.getTitre() << " a bien été acheté !" << "\n";
 }
 
 void Bibliotheque::supprime(int id_livre){
@@ -91,15 +97,7 @@ void Bibliotheque::supprime(int id_livre){
         cout << "Le livre n°" << id_livre << " est actuellement emprunté et ne peut donc pas être "
                 "supprimé" << "\n";
     } else {
-        Livre *nouvelle_liste = new Livre[100];
-        for (int i = 0; i < id_livre; i++) {
-            nouvelle_liste[i] = getLivre(i);
-        }
-        for (int i = id_livre; i < getNbLivres() - 1; i++) {
-            nouvelle_liste[i] = getLivre(i + 1);
-        }
-        liste_livres = nouvelle_liste;
-        delete[] nouvelle_liste;
+        liste_livres.erase(liste_livres.begin() + id_livre);
         nb_livres--;
         cout << "Le livre n°" << id_livre << " a bien été supprimé de la bibliothèque "
              << this->getNom() << ".\n";
@@ -115,6 +113,7 @@ void Bibliotheque::afficheLivres(){
         //Parcours de la liste de livres
         for (int i = 0; i < getNbLivres(); i++) {
             //Si le livre est emprunté ou prêté à une autre bibliothèque
+            cout << "on teste le statut du livre : " << getLivre(i).getEmprunte() << endl;
             if (getLivre(i).getEmprunte()||getLivre(i).getPreteA()) {
                 cout << "Livre n°" << i << " --> " << getLivre(i).getTitre()
                      << " - Non disponible" << "\n";
@@ -172,10 +171,10 @@ void Bibliotheque::demande(string ISBN, Bibliotheque &biblio_preteuse){
 
 Livre Bibliotheque::cherche(string ISBN){
     //Parcours de la liste de livres possédés
-    for (int i = 0; i < getNbLivres(); i++)
+    for (int i = 0; i < getNbLivres(); i++){
         //Si le livre i correspond à l'ISBN demandé et s'il est libre
         if (getLivre(i).getISBN() == ISBN && !getLivre(i).getEmprunte() && !getLivre(i).getPreteA()){
-            getLivre(i).setPreteA(true);
+            liste_livres[i].setPreteA(true);
             return getLivre(i);
         }
     }
@@ -192,7 +191,7 @@ void Bibliotheque::rend(){
         //Si le livre est prêté par une autre bibliothèque et qu'il est libre
         if (ancienId >= 0 && !getLivre(i).getEmprunte()){
             //Rend le à nouveau disponible pour sa bibliothèque d'origine
-            getBiblioPreteuse(i)->getLivre(ancienId).setPreteA(false);
+            getBiblioPreteuse(i)->liste_livres[ancienId].setPreteA(false);
             //Supprime le de cette bibliothèque ci
             this->supprime(i);
             cout << "Le livre n°" << i << " a été rendu à sa bibliothèque d'origine." << "\n";
@@ -211,7 +210,8 @@ bool Bibliotheque::prete(int id_livre){
                         "plus tard" << "\n";
                 return false;
             } else{
-                getLivre(i).setEmprunte(true);
+                liste_livres[i].setEmprunte(true);
+                cout << "On change le statut du livre : " << getLivre(i).getEmprunte() << endl;
                 cout << "Vous avez emprunté le livre n°" << id_livre << ". Merci de votre confiance !" << "\n";
                 return true;
             }
@@ -227,7 +227,7 @@ void Bibliotheque::reprend(int id_livre){
         //Si le livre demandé existe dans la bibliothèque
         if (getLivre(i).getId() == id_livre){
             //Libère le
-            getLivre(i).setEmprunte(false);
+            liste_livres[i].setEmprunte(false);
         }
     }
 }

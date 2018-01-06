@@ -14,8 +14,8 @@ protected:
     string public_cible;
     string categorie;
     bool emprunte; //emprunté par un adhérent
-    bool preteA; //prêté à une bibliothèque
-    int preteAvecId; //nous dit s'il est prêté par une bibliothèque et son id dans cette dernière
+    bool prete_a; //prêté à une bibliothèque
+    int prete_avec_id; //nous dit s'il est prêté par une bibliothèque et son id dans cette dernière
 
 public:
     //Constructors

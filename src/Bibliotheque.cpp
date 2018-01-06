@@ -113,13 +113,12 @@ void Bibliotheque::afficheLivres(){
         //Parcours de la liste de livres
         for (int i = 0; i < getNbLivres(); i++) {
             //Si le livre est emprunté ou prêté à une autre bibliothèque
-            cout << "on teste le statut du livre : " << getLivre(i).getEmprunte() << endl;
             if (getLivre(i).getEmprunte()||getLivre(i).getPreteA()) {
-                cout << "Livre n°" << i << " --> " << getLivre(i).getTitre()
-                     << " - Non disponible" << "\n";
+                cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
+                     << " - ISBN :" << " - Non disponible" << endl;
             } else{
-                cout << "Livre n°" << i << " --> " << getLivre(i).getTitre()
-                     << " - Disponible" << "\n";
+                cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
+                     << " - ISBN :" << " - Disponible" << endl;
             }
         }
     }
@@ -136,11 +135,11 @@ void Bibliotheque::afficheLivres(string categorie){
         for (int i = 0; i < getNbLivres(); i++) {
             if (getLivre(i).getCategorie() == categorie) {
                 if (getLivre(i).getEmprunte()||getLivre(i).getPreteA()) {
-                    cout << "Livre n°" << i << " --> " << getLivre(i).getTitre()
-                         << " - Non disponible" << "\n";
+                    cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
+                         << " - ISBN :" << " - Non disponible" << endl;
                 } else{
-                    cout << "Livre n°" << i << " --> " << getLivre(i).getTitre()
-                         << " - Disponible" << "\n";
+                    cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
+                         << " - ISBN :" << " - Disponible" << endl;
                 }
                 // Cela veut dire que la catégorie n'est pas vide
                 categorieVide = false;

@@ -279,14 +279,19 @@ int main()
                                             switch (choix_action_adherent) {
                                                 case 1:
                                                     int id_livre_emprunte;
-                                                    do {
-                                                        cout << "Entrez le numéro du livre que vous souhaitez emprunter"
-                                                             << endl;
-                                                        cin >> id_livre_emprunte;
-                                                        if (cin.fail()){
-                                                            __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
-                                                        }
-                                                    } while (id_livre_emprunte < 0||id_livre_emprunte >= liste_bibliotheques[id_biblio].getNbLivres());
+                                                    if (liste_bibliotheques[id_biblio].getNbLivres() != 0) {
+                                                        do {
+                                                            cout
+                                                                    << "Entrez le numéro du livre que vous souhaitez emprunter"
+                                                                    << endl;
+                                                            cin >> id_livre_emprunte;
+                                                            if (cin.fail()) {
+                                                                __throw_runtime_error(
+                                                                        "Vous deviez obligatoirement entrer un nombre entier !");
+                                                            }
+                                                        } while (id_livre_emprunte < 0 || id_livre_emprunte >=
+                                                                                          liste_bibliotheques[id_biblio].getNbLivres());
+                                                    }
                                                     liste_adherents[pos_adherent].emprunte(id_livre_emprunte);
                                                     break;
                                                 case 2:

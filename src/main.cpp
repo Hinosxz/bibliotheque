@@ -48,6 +48,7 @@ int main()
         cout << "Administration de bibliothèques\n---------------------" << endl;
         cout << "1. Bibliothèque\n2. Livre\n3. Quitter" << endl;
         cin >> choix_menu_principal;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         if (cin.fail()){
             __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
         }
@@ -59,6 +60,7 @@ int main()
                     cout << "3. Sélectionner une bibliothèque" << endl;
                     cout << "4. Retour" << endl;
                     cin >> choix_menu_bibliotheque;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     if (cin.fail()){
                         __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                     }
@@ -68,13 +70,11 @@ int main()
                             int id_biblio = liste_bibliotheques.size();
                             while (nom.empty()) {
                                 cout << "Entrez le nom de la bibliothèque" << endl;
-                                cin >> nom;
-                                cin.ignore(100, '\n');
+                                getline(cin, nom);
                             }
                             while (adresse.empty()) {
                                 cout << "Entrez l'adresse de la bibliothèque" << endl;
-                                cin >> adresse;
-                                cin.ignore(100, '\n');
+                                getline(cin, adresse);
                             }
                             Bibliotheque b(nom, adresse, id_biblio);
                             liste_bibliotheques.push_back(b);
@@ -92,6 +92,7 @@ int main()
                             do {
                                 cout << "Saisissez l'id de la bibliothèque à sélectionner" << endl;
                                 cin >> id_biblio;
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                 if (cin.fail()){
                                     __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                 }
@@ -107,6 +108,7 @@ int main()
                                         "7. Ajouter un adhérent\n8. Afficher les adhérents\n9. Sélectionner un adhérent\n"
                                         "10. Retour" << endl;
                                 cin >> choix_action;
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                 if (cin.fail()){
                                     __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                 }
@@ -116,6 +118,7 @@ int main()
                                         do {
                                             cout << "Veuillez entrer l'id d'un livre disponible !" << endl;
                                             cin >> choix_livre;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -136,6 +139,7 @@ int main()
                                                     << "Choisissez la catégorie\n1. Album\n2. Bande dessinée\n3. Pièce de théâtre\n4. Recueil de poésies\n5. Roman"
                                                     << endl;
                                             cin >> choix_categorie;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -173,6 +177,7 @@ int main()
                                         do {
                                             cout << "Veuillez entrer l'id d'un livre en stock" << endl;
                                             cin >> id_livre;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -186,11 +191,11 @@ int main()
                                         while (ISBN.empty()) {
                                             cout << "Entrez l'ISBN du livre désiré" << endl;
                                             cin >> ISBN;
-                                            cin.ignore(100, '\n');
                                         }
                                         do {
                                             cout << "Entrez le numéro de la bibliothèque prêteuse" << endl;
                                             cin >> choix_bibliotheque;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -207,22 +212,20 @@ int main()
                                         int nb_livres_max;
                                         while (nom.empty()) {
                                             cout << "Entrez le nom de l'adhérent" << endl;
-                                            cin >> nom;
-                                            cin.ignore(100, '\n');
+                                            getline(cin, nom);
                                         }
                                         while (prenom.empty()) {
                                             cout << "Entrez le prénom de l'adhérent" << endl;
-                                            cin >> prenom;
-                                            cin.ignore(100, '\n');
+                                            getline(cin, prenom);
                                         }
                                         while (adresse.empty()) {
                                             cout << "Entrez l'adresse de l'adhérent" << endl;
-                                            cin >> adresse;
-                                            cin.ignore(100, '\n');
+                                            getline(cin, adresse);
                                         }
                                         do {
                                             cout << "Entrez le nombre de livres maximum que l'adhérent peut emprunter" << endl;
                                             cin >> nb_livres_max;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -252,6 +255,7 @@ int main()
                                         do {
                                             cout << "Saisissez l'id de l'adhérent à sélectionner" << endl;
                                             cin >> id_adherent;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -273,6 +277,7 @@ int main()
                                             cout << "1. Emprunter un livre de la bibliothèque\n2. Rendre un livre\n"
                                                     "3. Retour" << endl;
                                             cin >> choix_action_adherent;
+                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                             if (cin.fail()){
                                                 __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                             }
@@ -285,6 +290,7 @@ int main()
                                                                     << "Entrez le numéro du livre que vous souhaitez emprunter"
                                                                     << endl;
                                                             cin >> id_livre_emprunte;
+                                                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                                             if (cin.fail()) {
                                                                 __throw_runtime_error(
                                                                         "Vous deviez obligatoirement entrer un nombre entier !");
@@ -300,6 +306,7 @@ int main()
                                                         cout << "Entrez le numéro du livre que vous souhaitez rendre"
                                                              << endl;
                                                         cin >> id_livre_rendu;
+                                                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                                         if (cin.fail()){
                                                             __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                                         }
@@ -342,6 +349,7 @@ int main()
                     cout << "2. Afficher les livres disponibles" << endl;
                     cout << "3. Retour" << endl;
                     cin >> choix_menu_livre;
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     if (cin.fail()){
                         __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                     }
@@ -349,30 +357,25 @@ int main()
                         case 1: {
                             string auteur, titre, editeur, ISBN, public_cible, categorie;
                             int choix_public_cible, choix_categorie;
-                            while (auteur.empty()) {
                                 cout << "Entrez le nom de l'auteur" << endl;
-                                cin >> auteur;
-                                cin.ignore(100, '\n');
-                            }
+                                getline(cin, auteur);
                             while (titre.empty()) {
                                 cout << "Entrez le titre du livre" << endl;
-                                cin >> titre;
-                                cin.ignore(100, '\n');
+                                getline(cin, titre);
                             }
                             while (editeur.empty()) {
                                 cout << "Entrez l'éditeur" << endl;
-                                cin >> editeur;
-                                cin.ignore(100, '\n');
+                                getline(cin, editeur);
                             }
                             while (ISBN.empty()) {
                                 cout << "Entrez l'ISBN-13" << endl;
                                 cin >> ISBN;
-                                cin.ignore(100, '\n');
                             }
                             while (public_cible.empty()) {
                                 cout << "Choisissez le public ciblé\n1. Adulte\n2. Ados\n3. Jeunesse\n4. Tout public"
                                      << endl;
                                 cin >> choix_public_cible;
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                 if (cin.fail()){
                                     __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                 }
@@ -398,6 +401,7 @@ int main()
                                 cout << "Choisissez la catégorie\n1. Album\n2. Bande dessinée\n3. Pièce de théâtre\n4. Recueil de poésies\n5. Roman"
                                      << endl;
                                 cin >> choix_categorie;
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                                 if (cin.fail()){
                                     __throw_runtime_error("Vous deviez obligatoirement entrer un nombre entier !");
                                 }
@@ -405,8 +409,7 @@ int main()
                                     case 1: {
                                         string type_illustration;
                                         cout << "Entrez le type d'illustration" << endl;
-                                        cin >> type_illustration;
-                                        cin.ignore(100, '\n');
+                                        getline(cin, type_illustration);
                                         Album a(auteur, titre, editeur, ISBN, public_cible, type_illustration);
                                         liste_livres_disponibles.push_back(a);
                                         categorie = "Album";
@@ -415,8 +418,7 @@ int main()
                                     case 2: {
                                         string dessinateur;
                                         cout << "Entrez le nom du dessinateur" << endl;
-                                        cin >> dessinateur;
-                                        cin.ignore(100, '\n');
+                                        getline(cin, dessinateur);
                                         BandeDessinee bd(auteur, titre, editeur, ISBN, public_cible, dessinateur);
                                         liste_livres_disponibles.push_back(bd);
                                         categorie = "Bande Dessinee";
@@ -425,8 +427,7 @@ int main()
                                     case 3: {
                                         string siecle;
                                         cout << "Entrez le siècle d'écriture" << endl;
-                                        cin >> siecle;
-                                        cin.ignore(100, '\n');
+                                        getline(cin, siecle);
                                         PieceTheatre p(auteur, titre, editeur, ISBN, public_cible, siecle);
                                         liste_livres_disponibles.push_back(p);
                                         categorie = "Piece de Theatre";
@@ -435,8 +436,7 @@ int main()
                                     case 4: {
                                         string indicateur;
                                         cout << "Entrez l'indicateur du recueil" << endl;
-                                        cin >> indicateur;
-                                        cin.ignore(100, '\n');
+                                        getline(cin, indicateur);
                                         RecueilPoesies recueil(auteur, titre, editeur, ISBN, public_cible, indicateur);
                                         liste_livres_disponibles.push_back(recueil);
                                         categorie = "Recueil de Poesies";
@@ -445,11 +445,11 @@ int main()
                                     case 5: {
                                         string genre;
                                         cout << "Entrez le genre du roman" << endl;
-                                        cin >> genre;
-                                        cin.ignore(100, '\n');
+                                        getline(cin, genre);
                                         Roman roman(auteur, titre, editeur, ISBN, public_cible, genre);
                                         liste_livres_disponibles.push_back(roman);
                                         categorie = "Roman";
+                                        break;
                                     }
                                     default:
                                         cout << "Veuillez choisir une catégorie existante !" << endl;

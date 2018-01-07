@@ -115,10 +115,10 @@ void Bibliotheque::afficheLivres(){
             //Si le livre est emprunté ou prêté à une autre bibliothèque
             if (getLivre(i).getEmprunte()||getLivre(i).getPreteA()) {
                 cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
-                     << " - ISBN :" << " - Non disponible" << endl;
+                     << " - ISBN : " << getLivre(i).getISBN() << " - Non disponible" << endl;
             } else{
                 cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
-                     << " - ISBN :" << " - Disponible" << endl;
+                     << " - ISBN : " << getLivre(i).getISBN() << " - Disponible" << endl;
             }
         }
     }
@@ -136,10 +136,10 @@ void Bibliotheque::afficheLivres(string categorie){
             if (getLivre(i).getCategorie() == categorie) {
                 if (getLivre(i).getEmprunte()||getLivre(i).getPreteA()) {
                     cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
-                         << " - ISBN :" << " - Non disponible" << endl;
+                         << " - ISBN : " << getLivre(i).getISBN() << " - Non disponible" << endl;
                 } else{
                     cout << "Livre n°" << i << " --> " << getLivre(i).getTitre() << " - " << getLivre(i).getAuteur()
-                         << " - ISBN :" << " - Disponible" << endl;
+                         << " - ISBN : " << getLivre(i).getISBN() << " - Disponible" << endl;
                 }
                 // Cela veut dire que la catégorie n'est pas vide
                 categorieVide = false;

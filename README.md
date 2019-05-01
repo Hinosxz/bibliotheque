@@ -1,2 +1,5 @@
-# bibliotheque
-Projet C++ Option S7 Bibliothèques
+# Library management app
+
+School project of a library management application in C++. 
+
+Written in French.
